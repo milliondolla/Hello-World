@@ -5,22 +5,21 @@
  * Balance by linking root of smaller tree to root of larger tree
  *
  */
-public class WeightedQuickUnionUF {
-
+public class Wquf {
 	private int[] id;
 	private int[] sz;
 
-	public WeightedQuickUnionUF(int N) {
-		id = new int[N];
-		sz = new int[N];
-		for (int i = 0; i < N; i++){
+	public Wquf(int n) {
+		id = new int[n];
+		sz = new int[n];
+		for (int i = 0; i < n; i++) {
 			id[i] = i;
 			sz[i] = 1;
 		}
 	}
 
 	private int root(int i) {
-		while (i != id[i]){
+		while (i != id[i]) {
 			id[i] = id[id[i]];// adds path compression
 			i = id[i];
 		}
@@ -44,7 +43,7 @@ public class WeightedQuickUnionUF {
 	public void union(int p, int q) {
 		int i = root(p);
 		int j = root(q);
-		
+
 		// where it differs from QuickUnionUF
 		if (i == j)
 			return;
@@ -56,7 +55,5 @@ public class WeightedQuickUnionUF {
 			sz[i] += sz[j];
 		}
 	}
-
-	
 
 }

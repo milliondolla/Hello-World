@@ -1,13 +1,12 @@
 
 public class Percolation {
-
-	private int n;
-	private WeightedQuickUnionUF wquf;
+	private static final int top = 0;
+	private final int n;
+	private final Wquf wquf;
 	private boolean[][] nByNGrid;
 	private int cntrOpen;
 
-	private int top = 0;
-	private int bottom;
+	private final int bottom;
 
 	/**
 	 * create n-by-n grid, with all sites blocked
@@ -18,7 +17,7 @@ public class Percolation {
 			throw new java.lang.IllegalArgumentException();
 
 		this.n = n;
-		this.wquf = new WeightedQuickUnionUF(n * n * 2);
+		this.wquf = new Wquf(n * n * 2);
 		this.cntrOpen = 0;
 		this.bottom = n * n + 1;
 
@@ -39,7 +38,8 @@ public class Percolation {
 	public void open(int row, int col) {
 
 		nByNGrid[row][col] = true;
-		
+		cntrOpen++;
+
 		int current = xyTo1D(row, col);
 
 		if (row == 1) {
@@ -86,8 +86,8 @@ public class Percolation {
 	}
 
 	/**
-	 * Percolates iff any site on bottom row is connected to site on top row iff
-	 * top & bottom are connected by open sites
+	 * Percolates iff any site on bottom row is connected to site on top row iff top
+	 * & bottom are connected by open sites
 	 */
 	public boolean percolates() {
 		return wquf.connected(top, bottom);
@@ -101,20 +101,6 @@ public class Percolation {
 	private int xyTo1D(int row, int col) {
 		int idx = col + (n * row);
 		return idx + 1;
-	}
-
-	/**
-	 * Determine the col in 2D from 1D idx
-	 */
-	private int oneDToCol(int idx) {
-		return (idx - 1) % n;
-	}
-
-	/**
-	 * Determine the row in 2D from 1D idx
-	 */
-	private int oneDToRow(int idx) {
-		return (idx - 1) / n;
 	}
 
 }
