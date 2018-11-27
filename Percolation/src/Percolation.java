@@ -6,20 +6,17 @@ public class Percolation {
 	private boolean[][] nByNGrid;
 	private int cntrOpen;
 
-	private final int bottom;
-
 	/**
 	 * create n-by-n grid, with all sites blocked
 	 */
 	public Percolation(int n) {
 
-		if (n < 0)
+		if (n <= 0)
 			throw new java.lang.IllegalArgumentException();
 
 		this.n = n;
 		this.wquf = new Wquf(n * n * 2);
 		this.cntrOpen = 0;
-		this.bottom = n * n + 1;
 
 		// create the grid N X N
 		this.nByNGrid = new boolean[n + 1][n + 1];
@@ -37,36 +34,43 @@ public class Percolation {
 	 */
 	public void open(int row, int col) {
 
-		nByNGrid[row][col] = true;
-		cntrOpen++;
+		validateArgs(row, col);
 
-		int current = xyTo1D(row, col);
+		if (!isOpen(row, col)) {
 
-		if (row == 1) {
-			wquf.union(current, 0);
-		}
-		if (row == n) {
-			wquf.union(current, bottom);
+			nByNGrid[row][col] = true;
+			cntrOpen++;
+
+			int current = xyTo1D(row, col);
+
+			if (row == 1) {
+				wquf.union(current, 0);
+			}
+
+			if (col > 1 && isOpen(row, col - 1)) {
+				wquf.union(current, xyTo1D(row, col - 1));
+			}
+
+			if (col < n && isOpen(row, col + 1)) {
+				wquf.union(current, xyTo1D(row, col + 1));
+			}
+
+			if (row > 1 && isOpen(row - 1, col)) {
+				wquf.union(current, xyTo1D(row - 1, col));
+			}
+
+			if (row < n && isOpen(row + 1, col)) {
+				wquf.union(current, xyTo1D(row + 1, col));
+			}
 		}
 
-		if (col > 1 && isOpen(row, col - 1)) {
-			wquf.union(current, xyTo1D(row, col - 1));
-		}
-		if (col < n && isOpen(row, col + 1)) {
-			wquf.union(current, xyTo1D(row, col + 1));
-		}
-		if (row > 1 && isOpen(row - 1, col)) {
-			wquf.union(current, xyTo1D(row - 1, col));
-		}
-		if (row < n && isOpen(row + 1, col)) {
-			wquf.union(current, xyTo1D(row + 1, col));
-		}
 	}
 
 	/**
 	 * is site (row, col) open? i.e. not connected to the top
 	 */
 	public boolean isOpen(int row, int col) {
+		validateArgs(row, col);
 		return nByNGrid[row][col];
 	}
 
@@ -74,6 +78,7 @@ public class Percolation {
 	 * is site (row, col) full? - is it connected to the top
 	 */
 	public boolean isFull(int row, int col) {
+		validateArgs(row, col);
 		int idx = xyTo1D(row, col);
 		return wquf.connected(idx, 0);
 	}
@@ -86,11 +91,20 @@ public class Percolation {
 	}
 
 	/**
-	 * Percolates iff any site on bottom row is connected to site on top row iff top
-	 * & bottom are connected by open sites
+	 * Percolates iff any site on bottom row is connected to site on top row iff
+	 * top & bottom are connected by open sites
 	 */
 	public boolean percolates() {
-		return wquf.connected(top, bottom);
+		// return wquf.connected(top, bottom);
+		boolean p = false;
+		for (int x = 1; x <= n; x++) {
+			int idx = xyTo1D(n, x);
+			if (wquf.connected(idx, top)) {
+				p = true;
+				break;
+			}
+		}
+		return p;
 	}
 
 	// Sites are in same component if connected by open sites
@@ -101,6 +115,15 @@ public class Percolation {
 	private int xyTo1D(int row, int col) {
 		int idx = col + (n * row);
 		return idx + 1;
+	}
+
+	private void validateArgs(int row, int col) {
+
+		if (row > n || col > n || row > Integer.MAX_VALUE || col > Integer.MAX_VALUE)
+			throw new IllegalArgumentException(String.format("Invalid row and/or column (%d, %d)", row, col));
+
+		if (row <= 0 || col <= 0)
+			throw new IllegalArgumentException(String.format("Invalid row and/or column (%d, %d)", row, col));
 	}
 
 }

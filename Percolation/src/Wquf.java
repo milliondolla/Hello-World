@@ -20,7 +20,10 @@ public class Wquf {
 
 	private int root(int i) {
 		while (i != id[i]) {
-			id[i] = id[id[i]];// adds path compression
+			
+			// adds path compression
+			id[i] = id[id[i]];
+			
 			i = id[i];
 		}
 		return i;
