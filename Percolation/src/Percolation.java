@@ -36,12 +36,12 @@ public class Percolation {
 
 		validateArgs(row, col);
 
+		int current = xyTo1D(row, col);
+
 		if (!isOpen(row, col)) {
 
 			nByNGrid[row][col] = true;
 			cntrOpen++;
-
-			int current = xyTo1D(row, col);
 
 			if (row == 1) {
 				wquf.union(current, 0);
@@ -65,6 +65,8 @@ public class Percolation {
 		}
 
 	}
+	
+	
 
 	/**
 	 * is site (row, col) open? i.e. not connected to the top
@@ -80,7 +82,7 @@ public class Percolation {
 	public boolean isFull(int row, int col) {
 		validateArgs(row, col);
 		int idx = xyTo1D(row, col);
-		return wquf.connected(idx, 0);
+		return wquf.connected(idx, top);
 	}
 
 	/**
@@ -113,8 +115,11 @@ public class Percolation {
 	 * Map 2D coordinates to 1D idx
 	 */
 	private int xyTo1D(int row, int col) {
-		int idx = col + (n * row);
-		return idx + 1;
+		if (n == 1) {
+			return 1;
+		} else {
+			return (col + (n * row)) + 1;
+		}
 	}
 
 	private void validateArgs(int row, int col) {
