@@ -15,7 +15,8 @@ public class ResizingArrayStack<T> {
 	private T[] s;
 	private int N = 0;
 
-	public ResizingArrayStack() {
+	@SuppressWarnings("unchecked")
+    public ResizingArrayStack() {
 		s = (T[]) new Object[1]; 
 	}
 

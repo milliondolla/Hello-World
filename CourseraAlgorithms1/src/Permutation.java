@@ -3,38 +3,42 @@ import edu.princeton.cs.algs4.StdOut;
 
 public class Permutation {
 
-	private static int k;
+    private static int k;
 
-	public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-		if (args.length == 0)
-			throw new Exception("No args");
+        try {
+            if (args.length == 0)
+                throw new Exception("No args");
 
-		k = Integer.parseInt(args[0]);
+            k = Integer.parseInt(args[0]);
 
-		if (k < 0)
-			throw new Exception("K < 0");
+            if (k < 0)
+                throw new Exception("K < 0");
 
-		int n = 0;
-		RandomizedQueue<String> q = new RandomizedQueue<String>();
-		String inStr = null;
-		do {
-			inStr = StdIn.readString();
-			if (inStr == null || !inStr.equalsIgnoreCase("*")) {
-				
-				q.enqueue(inStr);
-				n++;
-			}else{
-				break;
-			}
-		} while (!inStr.equalsIgnoreCase("*"));
+            int n = 0;
+            RandomizedQueue<String> q = new RandomizedQueue<String>();
+            String inStr = null;
+            do {
+                inStr = StdIn.readString();
+                if (inStr == null || !inStr.equalsIgnoreCase("*")) {
 
-		if (k > n)
-			throw new Exception("Not enough elements suuplied");
+                    q.enqueue(inStr);
+                    n++;
+                } else {
+                    break;
+                }
+            } while (!inStr.equalsIgnoreCase("*"));
 
-		for (int i = 0; i <= k; i++) {
-			StdOut.println(q.sample());
-		}
-	}
+            if (k > n)
+                throw new Exception("Not enough elements suuplied");
+
+            for (int i = 0; i <= k; i++) {
+                StdOut.println(q.sample());
+            }
+        } catch (Exception e) {
+            StdOut.println(e.getMessage());
+        }
+    }
 
 }

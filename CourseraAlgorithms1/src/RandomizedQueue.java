@@ -99,7 +99,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	public static void main(String[] args) {
 	}
 
-	private class RandomQueueIterator<Item> implements Iterator<Item> {
+    private class RandomQueueIterator<T> implements Iterator<T> {
 
 		private Node current = last;
 
@@ -108,13 +108,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			return current != null;
 		}
 
-		@Override
-		public Item next() {
+		@SuppressWarnings("unchecked")
+        @Override
+		public T next() {
 			if (isEmpty())
 				throw new java.util.NoSuchElementException();
-			Item currItem = (Item) current.item;
+			Object currItem = current.item;
 			current = current.prev;
-			return currItem;
+			return (T) currItem;
 		}
 
 		@Override
