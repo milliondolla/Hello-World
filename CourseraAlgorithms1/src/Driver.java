@@ -1,3 +1,5 @@
+import java.util.Iterator;
+
 public class Driver {
 
 	public static void main(String[] args) {
@@ -36,25 +38,34 @@ public class Driver {
 		dq.addLast("ss");
 		dq.addFirst("ee");
 		
+// test #1		
 //		System.out.println(dq.removeFirst());
 //		System.out.println(dq.removeFirst());
 //		System.out.println(dq.removeFirst());
 //		System.out.println(dq.removeFirst());
+
+// test #2
+//		System.out.println(dq.removeLast());
+//		System.out.println(dq.removeLast());
+//		System.out.println(dq.removeLast());
+//		System.out.println(dq.removeLast());
+	
+// test #3		
+//		System.out.println(dq.size());
+//		dq.removeFirst();
+//		System.out.println(dq.size());
+//		dq.removeFirst();
+//		System.out.println(dq.size());
+//		dq.removeFirst();
+//		System.out.println(dq.size());
+//		dq.removeFirst();
+//		System.out.println(dq.size());
 		
-//		System.out.println(dq.removeLast());
-//		System.out.println(dq.removeLast());
-//		System.out.println(dq.removeLast());
-//		System.out.println(dq.removeLast());
-		
-		System.out.println(dq.size());
-		dq.removeFirst();
-		System.out.println(dq.size());
-		dq.removeFirst();
-		System.out.println(dq.size());
-		dq.removeFirst();
-		System.out.println(dq.size());
-		dq.removeFirst();
-		System.out.println(dq.size());
+// Test #4		
+//		Iterator<String> it = dq.iterator();
+//		while(it.hasNext()){
+//			System.out.println(it.next());
+//		}
 		
 	}
 
