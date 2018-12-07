@@ -92,14 +92,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	// return an independent iterator over items in random order
 	@Override
 	public Iterator<Item> iterator() {
-		return new RandomQueueIterator<Item>();
+		return new RandomQueueIterator();
 	}
 
-	// unit testing (optional)
-	public static void main(String[] args) {
-	}
-
-    private class RandomQueueIterator<T> implements Iterator<T> {
+    private class RandomQueueIterator implements Iterator<Item> {
 
 		private Node current = last;
 
@@ -108,14 +104,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			return current != null;
 		}
 
-		@SuppressWarnings("unchecked")
         @Override
-		public T next() {
+		public Item next() {
 			if (isEmpty())
 				throw new java.util.NoSuchElementException();
-			Object currItem = current.item;
+			Item currItem = current.item;
 			current = current.prev;
-			return (T) currItem;
+			return currItem;
 		}
 
 		@Override
