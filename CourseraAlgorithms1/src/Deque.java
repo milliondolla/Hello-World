@@ -20,7 +20,8 @@ public class Deque<Item> implements Iterable<Item> {
 
 	// is the deque empty?
 	public boolean isEmpty() {
-		return (first == null && last == null);
+		// return (first == null && last == null);
+		return sz == 0;
 	}
 
 	// return the number of items on the deque
@@ -39,12 +40,17 @@ public class Deque<Item> implements Iterable<Item> {
 		Node newFirst = new Node();
 		newFirst.item = item;
 		newFirst.next = oldFirst;
+		newFirst.prev = null;
 
 		if (oldFirst != null) {
 			oldFirst.prev = newFirst;
 		}
 
 		first = newFirst;
+
+		if (last == null) {
+			last = first;
+		}
 		sz++;
 
 	}
@@ -61,10 +67,11 @@ public class Deque<Item> implements Iterable<Item> {
 		last.item = item;
 		last.next = null;
 		last.prev = oldlast;
-		if (isEmpty())
+		if (isEmpty() || first == null)
 			first = last;
-		// else
-		// oldlast.next = last;
+		else {
+			oldlast.next = last;
+		}
 
 		sz++;
 
@@ -79,7 +86,7 @@ public class Deque<Item> implements Iterable<Item> {
 			Item item = first.item;
 			first = first.next;
 
-			if (isEmpty()) {
+			if (isEmpty() || first == null) {
 				first = last;
 			} else {
 				first.prev = null;
@@ -99,13 +106,16 @@ public class Deque<Item> implements Iterable<Item> {
 
 			Node oldLast = last;
 
-			last = oldLast.prev;
-
-			if (isEmpty()) {
-				first = last;
-			} else {
-				last.next = null;
+			if (oldLast != null) {
+				last = oldLast.prev;
 			}
+
+			if (isEmpty() && first == null) {
+				first = last;
+			}
+			// else {
+			// last.next = null;
+			// }
 
 			sz--;
 
