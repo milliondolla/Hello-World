@@ -11,7 +11,6 @@ public class Deque<Item> implements Iterable<Item> {
         Item item;
         Node next;
         Node prev;
-
     }
 
     // construct an empty deque
@@ -21,7 +20,6 @@ public class Deque<Item> implements Iterable<Item> {
 
     // is the deque empty?
     public boolean isEmpty() {
-        // return (first == null && last == null);
         return sz == 0;
     }
 
@@ -46,7 +44,6 @@ public class Deque<Item> implements Iterable<Item> {
 
         if (oldFirst != null) {
             oldFirst.prev = newFirst;
-            // oldFirst.next = null;//TODO
         }
 
         first = newFirst;
@@ -58,10 +55,6 @@ public class Deque<Item> implements Iterable<Item> {
             last.next = null;
             last.prev = first;
         }
-        // else {
-        // last.next = null;
-        // last.prev = first;
-        // }
 
         sz++;
 
@@ -87,12 +80,6 @@ public class Deque<Item> implements Iterable<Item> {
 
         sz++;
 
-        // if(first.prev == null) StdOut.println("prev valid"); else
-        // StdOut.println("prev invalid") ;
-        //
-        // if(last.next == null) StdOut.println("last valid"); else StdOut.println("las
-        // invalid") ;
-
     }
 
     // remove and return the item from the front
@@ -106,6 +93,7 @@ public class Deque<Item> implements Iterable<Item> {
             if (size() == 1) {
                 first = null;
                 last = null;
+                sz = 0;
             } else {
                 first = first.next;
 
@@ -114,9 +102,10 @@ public class Deque<Item> implements Iterable<Item> {
                 } else {
                     first.prev = null;
                 }
+                
+                sz--;
             }
-
-            sz--;
+            
             return item;
         }
     }
@@ -134,6 +123,7 @@ public class Deque<Item> implements Iterable<Item> {
 
                 first = null;
                 last = null;
+                sz = 0;
 
             } else {
 
@@ -149,16 +139,11 @@ public class Deque<Item> implements Iterable<Item> {
                     first = last;
                     first.prev = null;
                 }
+                
+                sz--;
             }
 
-            // // empty deque
-            // if (isEmpty() && first == null) {
-            // last.next = null;
-            // first = last;
-            // first.prev = null;
-            // }
-
-            sz--;
+            
 
             return oldLast.item;
         }
