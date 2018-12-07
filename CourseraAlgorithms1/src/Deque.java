@@ -50,6 +50,8 @@ public class Deque<Item> implements Iterable<Item> {
 
 		if (last == null) {
 			last = first;
+			last.next = null;
+			last.prev = first;
 		}
 		sz++;
 
@@ -108,14 +110,16 @@ public class Deque<Item> implements Iterable<Item> {
 
 			if (oldLast != null) {
 				last = oldLast.prev;
+				if (last != null) {
+					last.next = null;
+				}
 			}
 
 			if (isEmpty() && first == null) {
+				last.next = null;
 				first = last;
+				first.prev = null;
 			}
-			// else {
-			// last.next = null;
-			// }
 
 			sz--;
 
@@ -140,7 +144,7 @@ public class Deque<Item> implements Iterable<Item> {
 
 		@Override
 		public Item next() {
-			if (isEmpty())
+			if (isEmpty() || hasNext() == false)
 				throw new java.util.NoSuchElementException();
 			Node currItem = current;
 			current = current.next;

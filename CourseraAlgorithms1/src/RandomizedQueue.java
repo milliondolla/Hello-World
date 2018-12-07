@@ -95,7 +95,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		return new RandomQueueIterator();
 	}
 
-    private class RandomQueueIterator implements Iterator<Item> {
+	private class RandomQueueIterator implements Iterator<Item> {
 
 		private Node current = last;
 
@@ -104,9 +104,9 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			return current != null;
 		}
 
-        @Override
+		@Override
 		public Item next() {
-			if (isEmpty())
+			if (isEmpty() || hasNext() == false)
 				throw new java.util.NoSuchElementException();
 			Item currItem = current.item;
 			current = current.prev;
