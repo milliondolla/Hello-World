@@ -1,0 +1,65 @@
+{
+	"type": "struct",
+	"fields": [
+		{
+			"name": "CountryCode",
+			"type": "string",
+			"nullable": true,
+			"metadata": {
+			}
+		},
+		{
+			"name": "Name",
+			"type": "string",
+			"nullable": true,
+			"metadata": {
+			}
+		},
+		{
+			"name": "Currency",
+			"type": {
+				"type": "struct",
+				"fields": [
+					{
+						"name": "ABSATraded",
+						"type": "string",
+						"nullable": true,
+						"metadata": {
+						}
+					},
+					{
+						"name": "CurrencyCode",
+						"type": "string",
+						"nullable": true,
+						"metadata": {
+						}
+					},
+					{
+						"name": "CurrencyName",
+						"type": "string",
+						"nullable": true,
+						"metadata": {
+						}
+					},
+					{
+						"name": "MajorIndicator",
+						"type": "string",
+						"nullable": true,
+						"metadata": {
+						}
+					},
+					{
+						"name": "PermissibleDailyVolatility",
+						"type": "double",
+						"nullable": true,
+						"metadata": {
+						}
+					}
+				]
+			},
+			"nullable": true,
+			"metadata": {
+			}
+		}
+	]
+}

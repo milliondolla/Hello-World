@@ -1,0 +1,100 @@
+{
+	"name": "ClientDomainMappingSchema",
+	"version": 0,
+	"fields": [
+		{
+			"name": "Party",
+			"type": "struct",
+			"nullable": true,
+			"metadata": {
+			},
+			"children": [
+				{
+					"name": "Key",
+					"type": "integer",
+					"nullable": true,
+					"metadata": {
+					},
+					"children": [
+					]
+				},
+				{
+					"name": "SDS",
+					"type": "array",
+					"elementType": "string",
+					"containsNull": true,
+					"nullable": true,
+					"metadata": {
+					},
+					"children": [
+					]
+				},
+				{
+					"name": "CIF",
+					"type": "array",
+					"elementType": "string",
+					"containsNull": true,
+					"nullable": true,
+					"metadata": {
+					},
+					"children": [
+					]
+				}
+			]
+		},
+		{
+			"name": "sbuId",
+			"type": "struct",
+			"nullable": true,
+			"metadata": {
+			},
+			"children": [
+				{
+					"name": "id",
+					"type": "string",
+					"nullable": true,
+					"metadata": {
+					},
+					"children": [
+					]
+				},
+				{
+					"name": "subSegmentId",
+					"type": "string",
+					"nullable": true,
+					"metadata": {
+					},
+					"children": [
+					]
+				}
+			]
+		},
+		{
+			"name": "iscSubType",
+			"type": "string",
+			"nullable": true,
+			"metadata": {
+			},
+			"children": [
+			]
+		},
+		{
+			"name": "intragroup",
+			"type": "string",
+			"nullable": true,
+			"metadata": {
+			},
+			"children": [
+			]
+		},
+		{
+			"name": "intragroupType",
+			"type": "string",
+			"nullable": true,
+			"metadata": {
+			},
+			"children": [
+			]
+		}
+	]
+}
